@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <title>Histórico de {{ aluno.nome }}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: Arial, sans-serif; margin:24px; }
+    table { width:100%; border-collapse:collapse; margin-top:12px; }
+    th, td { padding:8px 10px; border-bottom:1px solid #eee; text-align:left; }
+    .summary { margin-top:16px; padding:12px; border:1px solid #eee; border-radius:6px; background:#fafafa; }
+  </style>
+</head>
+<body>
+  <h1>Histórico do Aluno</h1>
+  <h2>{{ aluno.nome }}</h2>
+  <p>E-mail: {{ aluno.email }} | CPF: {{ aluno.cpf }} | Ingresso: {{ aluno.data_ingresso }}</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Curso</th>
+        <th>Data Matrícula</th>
+        <th>Valor Inscrição</th>
+        <th>Status Pagamento</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in matriculas %}
+        <tr>
+          <td>{{ m.curso.nome }}</td>
+          <td>{{ m.data_matricula }}</td>
+          <td>{{ m.curso.valor_inscricao }}</td>
+          <td>{{ m.get_status_pagamento_display }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="4">O aluno não possui matrículas.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <strong>Total devido:</strong> R$ {{ tot_devido }} <br/>
+    <strong>Total pago:</strong> R$ {{ tot_pago }}
+  </div>
+
+  <p style="margin-top:16px;"><a href="{% url 'gerenciamento_escola:dashboard' %}">Voltar ao dashboard</a></p>
+</body>
+</html>

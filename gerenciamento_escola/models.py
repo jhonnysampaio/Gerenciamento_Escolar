@@ -15,7 +15,7 @@ class Curso(models.Model):
     nome = models.CharField(max_length=50, unique=True)
     carga_horaria = models.PositiveIntegerField()
     valor_inscricao = models.DecimalField(max_digits=10, decimal_places=2)
-    status_curso = models.BooleanField(default=True)
+    status = models.BooleanField(default=True)
 
     def __str__(self):
         return self.nome
