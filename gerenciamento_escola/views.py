@@ -22,4 +22,15 @@ def historico_aluno(request, aluno_id):
     return render (request, "gerenciamento_escola/historico_aluno.html", context)
 
 def dashboard(request):
-    return render(request, "gerenciamento_escola/dashboard.html")
+    tot_alunos = Aluno.objects.count()
+    tot_matriculas =  Matricula.objects.count()
+
+    matriculas_pagas = Matricula.objects.filter(status_pagamento="pago").count()
+    matriculas_pendentes = Matricula.objects.filter(status_pagamento="pendente").count
+
+    return render(request, "gerenciamento_escola/dashboard.html",{
+        "tot_alunos" : tot_alunos,
+        "tot_matriculas" : tot_matriculas,
+        "matriculas_pagas" : matriculas_pagas,
+        "matriculas_pendentes"  : matriculas_pendentes,
+    })
