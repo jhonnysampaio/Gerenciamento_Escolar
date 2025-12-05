@@ -3,6 +3,9 @@ from .models import Aluno, Curso, Matricula
 
 # Create your views here.
 
+def home(request):
+    return render(request, "gerenciamento_escola/home.html")
+
 def historico_aluno(request, aluno_id):
     aluno = get_object_or_404(Aluno, pk=aluno_id)
     matriculas = Matricula.objects.filter(aluno=aluno).select_related("curso")
