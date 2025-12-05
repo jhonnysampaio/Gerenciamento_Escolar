@@ -1,6 +1,16 @@
 # projeto_django
 Desafio - dev python
 
+# Funcionalidades
+- Cadastro de alunos
+- Cadastro de cursos
+- Realiza matrículas de alunos em cursos
+- Lista alunos, cursos e matrículas
+- Possui status de pagamento da matrícula(Pendente/Pago)
+- Altera o status de pagamento
+- Altera status do curso(Ativo/Inativo)
+- API com rotas CRUD para integração
+
 ## Tecnologias Utilizadas:
 - Python 3
 - Django
@@ -40,3 +50,26 @@ http://localhost:8000
 
 Desenvolvido por Jhonny Sampaio
 GitHub: https://github.com/jhonnysampaio
+
+# Rotas do Projeto
+
+1. Rotas Web
+- "/" -> Página home
+- "dashboard/" -> Painel principal
+- "histórico-aluno/<id>/" Histórico e matrículas do aluno
+
+2. Administração
+- "admin/" -> Painel administrativo do Django
+
+3. Rotas da API
+
+ - "api/alunos/" -> Lista e cria alunos
+ - "api/alunos/<pk>/" -> Edita informações do aluno
+ - "api/cursos/" -> Lista e cria cursos
+ - "api/cursos/<pk>/" -> Edita informações do curso
+ - "api/matriculas/" -> Cria uma matrícula
+ - "api/matriculas/aluno/<aluno_id>/" -> Lista matrículas do aluno
+ - "api/matrículas/aluno/<pk>/" -> Edita a matrícula
+ - "api/relatorios/" -> Visualiza o relatório
+ - "api/relatorios/download/" -> Faz o download do relatório em um arquivo JSON
+ - "api/relatorios/raw/" -> Mostra dados crus do relatório em formato JSON
