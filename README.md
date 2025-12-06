@@ -48,15 +48,26 @@ http://localhost:8000
     - Criar migrações: python manage.py makemigrations 
     - Aplicar migrações: python manage.py migrate
 
-Desenvolvido por Jhonny Sampaio
-GitHub: https://github.com/jhonnysampaio
-
 # Rotas do Projeto
 
 1. Rotas Web
 - "/" -> Página home
 - "dashboard/" -> Painel principal
 - "histórico-aluno/<id>/" Histórico e matrículas do aluno
+- "/alunos/" -> Lista os alunos
+- "/alunos/cadastrar/" -> cadastra um novo aluno
+- "/alunos/editar/<aluno_id>" -> Edita as informações de um aluno
+- "/alunos/excluir/<aluno_id>" -> Excluir um aluno
+- "/cursos/" -> Lista os cursos
+- "/cursos/cadastrar/" -> cadastra um novo curso
+- "/cursos/editar/<curso_id>" -> Edita as informações de um curso
+- "/cursos/excluir/<curso_id>" -> Excluir um curso
+- "/matriculas/" -> Lista as matriculas
+- "/matriculas/cadastrar/" -> cadastra uma nova matrícula
+- "/matriculas/editar/<matricula_id>" -> Edita as informações de uma matrícula
+- "/matriculas/excluir/<matricula_id>" -> Excluir uma matrícula
+
+
 
 2. Administração
 - "admin/" -> Painel administrativo do Django
