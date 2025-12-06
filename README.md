@@ -66,6 +66,8 @@ http://localhost:8000
 - "/matriculas/cadastrar/" -> cadastra uma nova matrícula
 - "/matriculas/editar/<matricula_id>" -> Edita as informações de uma matrícula
 - "/matriculas/excluir/<matricula_id>" -> Excluir uma matrícula
+- "relatorio/" -> Mostra o relatório
+- "relatorio/baixar" -> Fax o download do relatório em arquivo JSON
 
 
 
