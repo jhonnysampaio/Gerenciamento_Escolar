@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Alunos</title>
+    <link rel="stylesheet" href="{% static 'gerenciamento_escola/relatorio.css' %}">
+
+</head>
+<body>
+    <div class="container">
+        <div class="topo">
+            <h1>Relatório de Alunos</h1>
+            <div class="totais-gerais">
+                <p>Total de alunos: {{ total_alunos }}</p>
+                <p>Total de pendências geral: R$ {{ total_pendencias_geral }}</p>
+            </div>
+        </div>
+
+        <a href=" /relatorio/baixar/ " class="btn-download">Download Relatório JSON</a>
+        <a href="/" class="btn-download">Home</a>
+
+        {% for aluno in detalhes %}
+        <div class="aluno-box">
+            <h2>{{ aluno.aluno }} ({{ aluno.email }})</h2>
+            <p class="totais">
+                Total devido: R$ {{ aluno.total_devido }} |
+                Pagamentos pendentes: R$ {{ aluno.pagamentos_pendentes }}
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th>Valor</th>
+                        <th>Status de Pagamento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for curso in aluno.cursos %}
+                    <tr>
+                        <td>{{ curso.curso }}</td>
+                        <td>R$ {{ curso.valor }}</td>
+                        <td class="{% if curso.status_pagamento == 'pago' %}status-pago{% else %}status-pendente{% endif %}">
+                            {{ curso.status_pagamento|capfirst }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

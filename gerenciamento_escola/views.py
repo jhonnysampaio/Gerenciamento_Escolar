@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Aluno, Curso, Matricula
 from .forms import AlunoForm, CursoForm, MatriculaForm
+from django.http import HttpResponse
+import json
 # Create your views here.
 
 def home(request):
@@ -88,7 +90,7 @@ def cadastrar_curso(request):
         if form.is_valid():
             form.save()
 
-            return redirect("gerenciamento_escola:lista_cursos")
+            return redirect("gerenciamento_escola:listar_cursos")
     
     else:
         form = CursoForm()
@@ -154,3 +156,82 @@ def excluir_matricula(request, matricula_id):
     matricula.delete()
 
     return redirect("gerenciamento_escola:listar_matriculas")
+
+def relatorio_view(request):
+    alunos = Aluno.objects.all()
+    relatorio = []
+
+    tot_alunos = Aluno.objects.count()
+    tot_pendencias = 0.0
+
+    for aluno in alunos:
+        matriculas = Matricula.objects.filter(aluno=aluno)
+
+        tot_devido = sum(float(m.curso.valor_inscricao) for m in matriculas)
+        pendente = sum(float(m.curso.valor_inscricao) for m in matriculas if m.status_pagamento != "pago")
+
+        tot_pendencias += float(pendente)
+
+        relatorio.append({
+            "aluno": aluno.nome,
+            "email": aluno.email,
+            "total_devido": float(tot_devido),
+            "pagamentos_pendentes": float(pendente),
+            "cursos": [
+                {
+                    "curso": m.curso.nome,
+                    "valor": float(m.curso.valor_inscricao),
+                    "status_pagamento": m.status_pagamento
+                }
+                for m in matriculas
+            ]
+        })
+
+    context = {
+        "total_alunos": tot_alunos,
+        "total_pendencias_geral": float(tot_pendencias),
+        "detalhes": relatorio
+    }
+
+    return render(request, "gerenciamento_escola/relatorio.html", context)
+
+def baixar_relatorio(request):
+    alunos = Aluno.objects.all()
+    relatorio = []
+
+    tot_alunos = Aluno.objects.count()
+    tot_pendencias = 0.0
+
+    for aluno in alunos:
+        matriculas = Matricula.objects.filter(aluno=aluno)
+
+        tot_devido = sum(float(m.curso.valor_inscricao) for m in matriculas)
+        pendente = sum(float(m.curso.valor_inscricao) for m in matriculas if m.status_pagamento != "pago")
+
+        tot_pendencias += float(pendente)
+
+        relatorio.append({
+            "aluno": aluno.nome,
+            "email": aluno.email,
+            "total_devido": float(tot_devido),
+            "pagamentos_pendentes": float(pendente),
+            "cursos": [
+                {
+                    "curso": m.curso.nome,
+                    "valor": float(m.curso.valor_inscricao),
+                    "status_pagamento": m.status_pagamento
+                }
+                for m in matriculas
+            ]
+        })
+
+    data = {
+        "total_alunos": tot_alunos,
+        "total_pendencias_geral": float(tot_pendencias),
+        "detalhes": relatorio
+    }
+
+    # Forçar download do arquivo JSON
+    response = HttpResponse(json.dumps(data, indent=4), content_type='application/json')
+    response['Content-Disposition'] = 'attachment; filename="relatorio.json"'
+    return response
