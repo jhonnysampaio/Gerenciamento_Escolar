@@ -1,6 +1,8 @@
 # projeto_django
 Desafio - dev python
 
+Vídeo de como rodar a aplicação: https://youtu.be/kO9q6BoiPR8
+
 # Funcionalidades
 - Cadastro de alunos
 - Cadastro de cursos
