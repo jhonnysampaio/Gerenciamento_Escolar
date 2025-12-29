@@ -1,4 +1,4 @@
-# Sistema de Gerenciamento de escolas.
+# Sistema de Gerenciamento Escolar.
 Nesse sistema é possível realizar cadastro de alunos e de cursos, os cursos recebem uma carga horária e se ele está ativo ou inativo. Com base nos alunos e cursos cadastrados, é possível realizar matrículas, colocando o valor da matrícula e se ela está paga ou pedente.
 
 Vídeo de como rodar a aplicação: https://youtu.be/kO9q6BoiPR8
