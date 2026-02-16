@@ -80,7 +80,7 @@ docker exec -it django_app bash
 - "/matriculas/editar/<matricula_id>" -> Edita as informações de uma matrícula
 - "/matriculas/excluir/<matricula_id>" -> Excluir uma matrícula
 - "relatorio/" -> Mostra o relatório
-- "relatorio/baixar" -> Fax o download do relatório em arquivo JSON
+- "relatorio/baixar" -> Faz o download do relatório em arquivo JSON
 
 
 
