@@ -33,12 +33,12 @@ git clone https://github.com/jhonnysampaio/Gerenciamento_Escolar.git
 ```
 
 ```
-- cd Gerenciamento_Escolar
+cd Gerenciamento_Escolar
 ```
 
 2. Rodar o projeto com Docker
 ```
-- docker-compose up --build
+docker-compose up --build
 ```
 
 - Depois que os container subir, acesse:
@@ -46,7 +46,7 @@ http://localhost:8000
 
 3. Parar container:
 ```
-- docker-compose down
+docker-compose down
 ```
 
 # Utilizando o container
