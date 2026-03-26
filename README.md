@@ -33,7 +33,7 @@ git clone https://github.com/jhonnysampaio/Gerenciamento_Escolar.git
 ```
 
 ```
-- cd projeto_django
+- cd Gerenciamento_Escolar
 ```
 
 2. Rodar o projeto com Docker
